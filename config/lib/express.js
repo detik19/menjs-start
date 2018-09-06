@@ -35,8 +35,8 @@ module.exports.initLocalVariables = function (app) {
   app.locals.googleAnalyticsTrackingID = config.app.googleAnalyticsTrackingID;
   app.locals.facebookAppId = config.facebook.clientID;
   app.locals.twitterUsername = config.twitter.username;
-  app.locals.jsFiles = config.files.client.js;
-  app.locals.cssFiles = config.files.client.css;
+  // app.locals.jsFiles = config.files.client.js;
+  // app.locals.cssFiles = config.files.client.css;
   app.locals.livereload = config.livereload;
   app.locals.logo = config.logo;
   app.locals.favicon = config.favicon;
@@ -64,7 +64,7 @@ module.exports.initMiddleware = function (app) {
   }));
 
   // Initialize favicon middleware
-  app.use(favicon(app.locals.favicon));
+  //app.use(favicon(app.locals.favicon));
 
   // Enable logger (morgan) if enabled in the configuration file
   if (_.has(config, 'log.format')) {
@@ -94,13 +94,13 @@ module.exports.initMiddleware = function (app) {
 /**
  * Configure view engine
  */
-module.exports.initViewEngine = function (app) {
-  app.engine('server.view.html', hbs.express4({
-    extname: '.server.view.html'
-  }));
-  app.set('view engine', 'server.view.html');
-  app.set('views', path.resolve('./'));
-};
+// module.exports.initViewEngine = function (app) {
+//   app.engine('server.view.html', hbs.express4({
+//     extname: '.server.view.html'
+//   }));
+//   app.set('view engine', 'server.view.html');
+//   app.set('views', path.resolve('./'));
+// };
 
 /**
  * Configure Express session
@@ -158,15 +158,15 @@ module.exports.initHelmetHeaders = function (app) {
 /**
  * Configure the modules static routes
  */
-module.exports.initModulesClientRoutes = function (app) {
-  // Setting the app router and static folder
-  app.use('/', express.static(path.resolve('./public'), { maxAge: 86400000 }));
+// module.exports.initModulesClientRoutes = function (app) {
+//   // Setting the app router and static folder
+//   app.use('/', express.static(path.resolve('./public'), { maxAge: 86400000 }));
 
-  // Globbing static routing
-  config.folders.client.forEach(function (staticPath) {
-    app.use(staticPath, express.static(path.resolve('./' + staticPath)));
-  });
-};
+//   // Globbing static routing
+//   // config.folders.client.forEach(function (staticPath) {
+//   //   app.use(staticPath, express.static(path.resolve('./' + staticPath)));
+//   // });
+// };
 
 /**
  * Configure the modules ACL policies
@@ -231,13 +231,13 @@ module.exports.init = function (db) {
   this.initMiddleware(app);
 
   // Initialize Express view engine
-  this.initViewEngine(app);
+  //this.initViewEngine(app);
 
   // Initialize Helmet security headers
   this.initHelmetHeaders(app);
 
   // Initialize modules static client routes, before session!
-  this.initModulesClientRoutes(app);
+  //this.initModulesClientRoutes(app);
 
   // Initialize Express session
   this.initSession(app, db);
