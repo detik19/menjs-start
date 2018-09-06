@@ -39,6 +39,9 @@ exports.renderServerError = function (req, res) {
   });
 };
 
+// exports.helloWorld = function(req, res) {
+//   res.json
+// }
 /**
  * Render the server not found responses
  * Performs content-negotiation on the Accept HTTP header
